@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 import { deleteContact } from '../../redux/contacts/operations'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { IoPersonSharp } from 'react-icons/io5'
+import { RiDeleteBin2Line } from 'react-icons/ri'
 import css from './Contact.module.css'
 
 const Contact = ({ contact }) => {
@@ -22,7 +23,7 @@ const Contact = ({ contact }) => {
         </div>
       </div>
       <button className={css.btn} onClick={handleDelete}>
-        Delete
+        <RiDeleteBin2Line />
       </button>
     </div>
   )

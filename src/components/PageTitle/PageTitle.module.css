@@ -1,0 +1,19 @@
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 28px;
+    color: #2a363b;
+} 
+
+@media only screen and (min-width: 768px) {
+    .title {
+        font-size: 38px;
+    }
+
+}
+
+@media only screen and (min-width: 1440px) {
+    .title {
+        font-size: 48px;
+    }
+
+}

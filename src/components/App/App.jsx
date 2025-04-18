@@ -1,13 +1,13 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-// import AppBar from '../AppBar/AppBar'
 import PrivateRoute from '../PrivateRoute'
 import RestrictedRoute from '../RestrictedRoute'
 import { refreshUser } from '../../redux/auth/operations'
 import css from './App.module.css'
 import { selectIsRefreshing } from '../../redux/auth/selectors'
 import Layout from '../Layout/Layout'
+import { Commet, ThreeDot } from 'react-loading-indicators'
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'))
 const RegistrationPage = lazy(() =>
@@ -19,7 +19,6 @@ const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'))
 
 export default function App() {
   const dispatch = useDispatch()
-
   const isRefreshing = useSelector(selectIsRefreshing)
 
   useEffect(() => {
@@ -27,10 +26,29 @@ export default function App() {
   }, [dispatch])
 
   return isRefreshing ? (
-    <strong>Getting user data, please wait...</strong>
+    <div className={css.refresh}>
+      <ThreeDot
+        text="Getting user data, please wait..."
+        textColor="#2d737c"
+        variant="bounce"
+        color="#80abab"
+        size="Large"
+      />
+    </div>
   ) : (
     <Layout>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense
+        fallback={
+          <div className={css.loading}>
+            <Commet
+              color="#80abab"
+              size="large"
+              text="Loading..."
+              textColor="#2d737c"
+            />
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route

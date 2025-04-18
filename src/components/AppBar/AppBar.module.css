@@ -2,6 +2,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    min-width: 320px;
+    width: 100%;
+    margin: 0 auto 16px;
     border-bottom: 16px solid #2a363b;
+    font-family: 'Pacifico',cursive;
+    font-size: 18px;
+    color: #2a363b;
+}
+
+@media only screen and (min-width: 375px) {
+    .header {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .header {
+    font-size: 35px;
+    }
 }

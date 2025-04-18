@@ -4,6 +4,12 @@
     padding: 12px;
     font-weight: 700;
     color: #2a363b;
+    transition: transform 0.3s ease-in-out;
+}
+
+.link:hover,
+.link:focus {
+    transform: scale(1.2);
 }
 
 .link.active {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addContact } from '../../redux/contacts/operations'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -28,39 +29,56 @@ export default function ContactForm() {
     resetForm()
   }
 
+  const [showForm, setShowForm] = useState(false)
+
+  const toggleForm = () => {
+    setShowForm((prev) => !prev)
+  }
+
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleAdd}
-      validationSchema={FeedbackSchema}
-    >
-      <Form className={css.form}>
-        <label className={css.label}>Name</label>
-        <Field
-          className={css.field}
-          type="text"
-          name="name"
-          id="id"
-          onInput={(e) => {
-            e.target.value = formatName(e.target.value)
-          }}
-        />
-        <ErrorMessage className={css.error} name="name" component="span" />
-        <label className={css.label}>Number</label>
-        <Field
-          className={css.field}
-          type="text"
-          name="number"
-          id="number"
-          onInput={(e) => {
-            e.target.value = formatPhoneNumber(e.target.value)
-          }}
-        />
-        <ErrorMessage className={css.error} name="number" component="span" />
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </Form>
-    </Formik>
+    <div className={css.addNewForm}>
+      <button onClick={toggleForm} className={css.addNewFormBtn}>
+        {showForm ? 'Hide add' : 'Add new contact'}
+      </button>
+      {showForm && (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleAdd}
+          validationSchema={FeedbackSchema}
+        >
+          <Form className={css.form}>
+            <label className={css.label}>Name</label>
+            <Field
+              className={css.field}
+              type="text"
+              name="name"
+              id="id"
+              onInput={(e) => {
+                e.target.value = formatName(e.target.value)
+              }}
+            />
+            <ErrorMessage className={css.error} name="name" component="span" />
+            <label className={css.label}>Phone number</label>
+            <Field
+              className={css.field}
+              type="text"
+              name="number"
+              id="number"
+              onInput={(e) => {
+                e.target.value = formatPhoneNumber(e.target.value)
+              }}
+            />
+            <ErrorMessage
+              className={css.error}
+              name="number"
+              component="span"
+            />
+            <button className={css.btn} type="submit">
+              <p className={css.text}>Add contact</p>
+            </button>
+          </Form>
+        </Formik>
+      )}
+    </div>
   )
 }

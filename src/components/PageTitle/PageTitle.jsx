@@ -1,5 +1,7 @@
+import css from './PageTitle.module.css'
+
 const PageTitle = ({ children }) => {
-  return <div>{children}</div>
+  return <div className={css.title}>{children}</div>
 }
 
 export default PageTitle
